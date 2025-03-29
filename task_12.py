@@ -3,12 +3,24 @@ class Dessert:
         self.__name = name
         self.__calories = calories
 
-    def get_dessert(self):
-        return self.__name, self.__calories
+    @property
+    def name(self):
+        return self.__name
 
-    def set_dessert(self, name, calories):
+    @name.setter
+    def name(self, name):
         self.__name = name
+
+    @property
+    def calories(self):
+        return self.__calories
+
+    @calories.setter
+    def calories(self, calories):
         self.__calories = calories
+
+    def get_info(self):
+        return self.__name, self.__calories
 
     def is_healthy(self):
         if(self.__calories != None and self.__calories < 200):
@@ -23,14 +35,16 @@ class JellyBean(Dessert):
         super().__init__(name, calories)
         self.__flavor = flavor
 
-    def get_flavor(self):
+    @property
+    def flavor(self):
         return self.__flavor
 
-    def set_flavor(self, flavor):
+    @flavor.setter
+    def flavor(self, flavor):
         self.__flavor = flavor
 
     def get_info(self):
-        return self.get_dessert() + (self.get_flavor(),)
+        return self.name, self.calories, self.__flavor
 
     def is_delicious(self):
         if self.__flavor == "black licorice":
@@ -38,7 +52,7 @@ class JellyBean(Dessert):
         return True
 
 dessert = Dessert("Апельсин", 50)
-print(dessert.get_dessert())
+print(dessert.get_info())
 print(dessert.is_healthy())
 print(dessert.is_delicious())
 
@@ -46,6 +60,6 @@ print()
 
 jellybean = JellyBean("Торт", 350, "black licorice")
 print(jellybean.get_info())
-print(jellybean.get_flavor())
+print(jellybean.flavor)
 print(jellybean.is_healthy())
 print(jellybean.is_delicious())
